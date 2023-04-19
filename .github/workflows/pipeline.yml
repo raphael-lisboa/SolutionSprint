@@ -30,9 +30,9 @@ jobs:
 	runs-on: ubuntu-latest
 	
 	steps:
-		- name: Checkout Repo
-		  uses: actions/checkout@v2
-		  with:
+	  - name: Checkout Repo
+	  uses: actions/checkout@v2
+	  with:
 		          fetch-depth: 0
 
 		- name: Heroku Login
