@@ -24,3 +24,36 @@ jobs:
 
       - name: Unit Test
         run: python -m unittest -v test
+
+Deploy:
+	needs: Build
+	runs-on: ubuntu-latest
+	
+	steps:
+		- name: Checkout Repo
+		  uses: actions/checkout@v2
+		  with:
+		          fetch-depth: 0
+
+		- name: Heroku Login
+		  run:
+		          cat > ~/.netrc <<E0F
+			machine api.heroku.com
+				login $HEROKU_EMAIL
+				password $HEROKU_API_KEY
+			machine api.heroku.com
+				login $HEROKU_EMAIL
+				password $HEROKU_API_KEY
+			E0F
+		env:
+			HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+			HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+		
+		- name: add Heroic Remote
+		  run: heroic git:remote - -app $HEROKU_APP_NAME
+		  env:
+			HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+
+		- name: Push to Heroku & Deploy
+		  run: git push heroic HEAD:main —force
+		
