@@ -26,7 +26,7 @@ jobs:
         run: python -m unittest -v test
 
   Deploy:
-	needs: Build
+  	needs: Build
 	runs-on: ubuntu-latest
 	
 	steps:
@@ -35,7 +35,7 @@ jobs:
 	  with:
 		          fetch-depth: 0
 
-		- name: Heroku Login
+	  - name: Heroku Login
 		  run:
 		          cat > ~/.netrc <<E0F
 			machine api.heroku.com
