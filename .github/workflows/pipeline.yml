@@ -25,18 +25,18 @@ jobs:
       - name: Unit Test
         run: python -m unittest -v test
 
-	Deploy:
-		needs: Build
-		runs-on: ubuntu-latest
+  Deploy:
+	needs: Build
+	runs-on: ubuntu-latest
 	
-		steps:
+	steps:
 	  - name: Checkout Repo
-	  	uses: actions/checkout@v2
-	  	with:
-		    fetch-depth: 0
+	  uses: actions/checkout@v2
+	  with:
+		fetch-depth: 0
 
-		- name: Heroku Login
-		  run:
+	  - name: Heroku Login
+	  run:
 		      cat > ~/.netrc <<E0F
 						machine api.heroku.com
 							login $HEROKU_EMAIL
