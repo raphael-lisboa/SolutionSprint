@@ -9,7 +9,7 @@ on:
 
 jobs:
   Build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latesT
     steps:
 
       - name: Setup Python
